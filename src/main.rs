@@ -4,7 +4,8 @@ use std::fmt;
 use std::io::{self, stdin};
 use std::{thread, time};
 
-const DEFAULT_CHARS: &str = ". ' , ^ \" ~ + - = # @ $";
+// const DEFAULT_CHARS: &str = "$ @ # = - + ~ \" ^ , ' .";
+const DEFAULT_CHARS: &str = "@ % # * + = - : .";
 
 #[derive(Parser)]
 #[command(name = "Ascii-Art")]
@@ -15,7 +16,7 @@ struct Args {
         short,
         long,
         default_value = DEFAULT_CHARS,
-        help = "provide a list of chars from least to most intense, separated by whitespace"
+        help = "provide a list of chars from most to least intense, separated by whitespace"
     )]
     chars: Option<String>,
 
@@ -85,8 +86,8 @@ impl AsciiPrinter {
     }
     fn set_chars(self, intense_chars: String) -> Self {
         let mut chars = Vec::with_capacity(intense_chars.len() + 1);
-        chars.push(' ');
         chars.extend(intense_chars.chars());
+        chars.push(' ');
         AsciiPrinter {
             src_img: self.src_img,
             chars,
