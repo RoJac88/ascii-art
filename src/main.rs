@@ -177,7 +177,6 @@ fn main() -> Result<(), AppError> {
         Some(src) => src.to_string(),
         None => read_stdin()?,
     };
-    println!("selected img {}", image_path);
     let printer = AsciiPrinter::default();
     printer
         .load_image(&image_path)
